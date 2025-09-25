@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Vendedor: {{ seller.name }}</h2>
+<p>{{ seller.bio }}</p>
+<h3>Produtos</h3>
+<div class="row">
+  {% for p in products %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <video width="100%" controls style="max-height:200px;">
+        <source src="{{ url_for('videos', filename=p.filename) }}" type="video/mp4">
+      </video>
+      <div class="card-body">
+        <h5>{{ p.title }}</h5>
+        <p>{{ p.short_desc }}</p>
+        <a href="{{ url_for('product', pid=p.id) }}" class="btn btn-primary">Detalhes</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

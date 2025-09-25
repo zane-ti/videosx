@@ -1,0 +1,1 @@
+Coloque aqui seus arquivos estáticos (CSS, JS, imagens).

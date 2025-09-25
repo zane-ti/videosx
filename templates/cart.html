@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Seu Carrinho</h2>
+{% if items %}
+<table class="table">
+  <thead><tr><th>Produto</th><th>Qtd</th><th>Subtotal</th><th></th></tr></thead>
+  <tbody>
+    {% for it in items %}
+    <tr>
+      <td>{{ it.product.title }}</td>
+      <td>{{ it.qty }}</td>
+      <td>${{ "%.2f"|format(it.subtotal) }}</td>
+      <td>
+        <form method="post" action="{{ url_for('cart_remove', pid=it.product.id) }}">
+          <button class="btn btn-sm btn-danger">Remover</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p><strong>Total:</strong> ${{ "%.2f"|format(total) }}</p>
+<form method="post" action="{{ url_for('create_checkout_session') }}">
+  <button class="btn btn-primary">Pagar com Stripe</button>
+</form>
+{% else %}
+<p>Seu carrinho está vazio.</p>
+{% endif %}
+{% endblock %}

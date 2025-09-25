@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Últimos Vídeos</h1>
+<div class="row">
+  {% for p in products %}
+  <div class="col-md-4 mb-3">
+    <div class="card">
+      <video width="100%" controls poster="" style="max-height:200px;">
+        <source src="{{ url_for('videos', filename=p.filename) }}" type="video/mp4">
+        Seu navegador não suporta vídeo.
+      </video>
+      <div class="card-body">
+        <h5 class="card-title">{{ p.title }}</h5>
+        <p class="card-text">{{ p.short_desc }}</p>
+        <p class="card-text"><small class="text-muted">Vendedor: <a href="{{ url_for('seller', slug=p.seller_slug) if p.seller_slug else '#' }}">{{ p.seller_name }}</a></small></p>
+        <a class="btn btn-primary" href="{{ url_for('product', pid=p.id) }}">Detalhes</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
