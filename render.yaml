@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: video-store-full
+    env: docker
+    plan: standard
+    dockerfilePath: ./Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: FLASK_SECRET_KEY
+      - key: STRIPE_SECRET_KEY
+      - key: STRIPE_WEBHOOK_SECRET
